@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 import collections
 import time
 
-import ns_stitchclient.client
+import ns_stitchclient.client as stitchclient.client
 from ns_stitchclient.client import BufferEntry, Client
 
 class TestTargetStitch(unittest.TestCase):
