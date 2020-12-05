@@ -3,7 +3,7 @@ from unittest.mock import MagicMock
 import collections
 import time
 
-import ns_stitchclient.client as stitchclient.client
+import ns_stitchclient.client 
 from ns_stitchclient.client import BufferEntry, Client
 
 class TestTargetStitch(unittest.TestCase):
@@ -15,7 +15,7 @@ class TestTargetStitch(unittest.TestCase):
 
     def test_push(self):
         pass
-        # client = stitchclient.Client(
+        # client = ns_stitchclient.client (
         #     client_id=client_id,
         #     token=token,
         #     table_name=table_name,
@@ -75,32 +75,32 @@ class TestBuffer(unittest.TestCase):
 class TestPartitionBatch(unittest.TestCase):
 
     def test_cant_use_larger_than_max_message_size(self):
-        with self.assertRaises(stitchclient.client.MessageTooLargeException):
+        with self.assertRaises(ns_stitchclient.client .MessageTooLargeException):
             entry = BufferEntry('a record that is far too long', None)
-            stitchclient.client.partition_batch([entry], 10)
+            ns_stitchclient.client .partition_batch([entry], 10)
 
     def test_get_single_record(self):
         entry = BufferEntry('a', None)
-        partitioned = stitchclient.client.partition_batch([entry], 10)
+        partitioned = ns_stitchclient.client .partition_batch([entry], 10)
         self.assertEqual(partitioned, [(b'["a"]', [None])])
 
     def test_get_multiple_records(self):
         entry_a = BufferEntry('a', 1)
         entry_b = BufferEntry('b', 2)
-        partitioned = stitchclient.client.partition_batch([entry_a, entry_b], 10)
+        partitioned = ns_stitchclient.client .partition_batch([entry_a, entry_b], 10)
         self.assertEqual(partitioned, [(b'["a","b"]', [1, 2])])
 
     def test_get_multiple_records_split(self):
         entry_a = BufferEntry('a', 1)
         entry_b = BufferEntry('b', 2)
-        partitioned = stitchclient.client.partition_batch([entry_a, entry_b], 6)
+        partitioned = ns_stitchclient.client .partition_batch([entry_a, entry_b], 6)
         self.assertEqual(partitioned, [(b'["a"]', [1]),
                                        (b'["b"]', [2])])
 
     def test_get_many_records(self):
         letters = 'abcdefghijklmnopqrstuvwxyz'
         entries = [BufferEntry(x, None) for x in letters]
-        partitioned = stitchclient.client.partition_batch(entries, 25)
+        partitioned = ns_stitchclient.client .partition_batch(entries, 25)
         partitioned_messages = [x[0] for x in partitioned]
 
         self.assertEqual(
