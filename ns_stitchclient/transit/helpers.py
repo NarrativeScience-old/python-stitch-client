@@ -11,3 +11,21 @@
 ## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ## See the License for the specific language governing permissions and
 ## limitations under the License.
+
+import itertools
+from .pyversion import imap, izip
+
+
+def mapcat(f, i):
+    return itertools.chain.from_iterable(imap(f, i))
+
+
+def pairs(i):
+    return izip(*[iter(i)] * 2)
+
+
+cycle = itertools.cycle
+
+
+def take(n, i):
+    return itertools.islice(i, 0, n)
