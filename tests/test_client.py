@@ -3,8 +3,8 @@ from unittest.mock import MagicMock
 import collections
 import time
 
-import stitchclient.client
-from stitchclient.client import BufferEntry, Client
+import ns_stitchclient.client
+from ns_stitchclient.client import BufferEntry, Client
 
 class TestTargetStitch(unittest.TestCase):
 
